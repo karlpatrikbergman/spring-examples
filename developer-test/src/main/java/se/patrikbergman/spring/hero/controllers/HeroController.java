@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import se.patrikbergman.spring.hero.aspect.logging.Logged;
+import se.patrikbergman.spring.hero.domain.Gender;
 import se.patrikbergman.spring.hero.domain.Hero;
+import se.patrikbergman.spring.hero.domain.MarvelHero;
 import se.patrikbergman.spring.hero.exceptions.HeroNotFoundException;
 import se.patrikbergman.spring.hero.services.HeroService;
 
@@ -25,17 +27,22 @@ public class HeroController {
     @Autowired
     HeroService heroService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "/get/all")
     public ResponseEntity<Map<Integer,Hero>> listHeroes() {
         return new ResponseEntity<Map<Integer,Hero>>(heroService.list(), HttpStatus.OK);
     }
 
     @Logged
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/get/{id}")
     public ResponseEntity<Hero> getHero(@PathVariable String id) {
-        log.debug("Recieved GET with id " + id);
-
         return new ResponseEntity<Hero>(heroService.get(Integer.parseInt(id)), HttpStatus.OK);
+    }
+
+    @Logged
+    @RequestMapping(method = RequestMethod.PUT, value = "/add")
+    public ResponseEntity<Hero> addHero(@RequestBody MarvelHero hero) {
+        heroService.save(hero);
+        return new ResponseEntity<Hero>(hero, HttpStatus.OK);
     }
 
     @Logged

@@ -4,6 +4,7 @@ package se.patrikbergman.spring.hero.repositories;
 import org.junit.Test;
 import se.patrikbergman.spring.hero.domain.Gender;
 import se.patrikbergman.spring.hero.domain.Hero;
+import se.patrikbergman.spring.hero.domain.MarvelHero;
 import se.patrikbergman.spring.hero.exceptions.HeroNotFoundException;
 
 import static org.junit.Assert.*;
@@ -20,6 +21,21 @@ public class HeroInMemoryRepositoryTest {
             assertEquals("SuperMan", hero.getName());
             assertEquals("Kryptonite", hero.getWeakness());
             assertEquals(Gender.MAN, hero.getGender());
+            System.out.println(hero);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void thatSpiderWomanIsSaved() {
+        try {
+            Hero hero = inMemoryRepository.save(new MarvelHero("SpiderWoman","Rain", Gender.WOMAN));
+            assertNotNull(hero);
+            assertNotEquals(0, hero.getId());
+            assertEquals("SpiderWoman", hero.getName());
+            assertEquals("Rain", hero.getWeakness());
+            assertEquals(Gender.WOMAN, hero.getGender());
             System.out.println(hero);
         } catch (Exception e) {
             fail(e.getMessage());

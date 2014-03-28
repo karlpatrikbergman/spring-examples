@@ -9,6 +9,6 @@ public interface HeroRepository {
 
     Map<Integer, Hero> list();
     Hero get(Integer id) throws HeroNotFoundException ;
-    void save(Hero hero);
+    Hero save(Hero hero);
 
 }

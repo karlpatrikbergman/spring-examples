@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.patrikbergman.spring.hero.aspect.timing.Timed;
 import se.patrikbergman.spring.hero.domain.Hero;
+import se.patrikbergman.spring.hero.domain.MarvelHero;
 import se.patrikbergman.spring.hero.exceptions.HeroNotFoundException;
 import se.patrikbergman.spring.hero.repositories.HeroRepository;
 
@@ -22,5 +23,9 @@ public class HeroService {
     @Timed
     public Hero get(Integer id) throws HeroNotFoundException {
         return heroRepository.get(id);
+    }
+
+    public Hero save(Hero hero) {
+        return heroRepository.save(hero);
     }
 }

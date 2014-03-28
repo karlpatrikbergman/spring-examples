@@ -1,9 +1,9 @@
 package se.patrikbergman.spring.hero.domain;
 
-public interface Hero {
-
-    String getName();
-    Gender getGender();
-    String getWeakness();
-
+public abstract class Hero {
+    protected int id;
+    public abstract int getId();
+    public abstract String getName();
+    public abstract Gender getGender();
+    public abstract String getWeakness();
 }
